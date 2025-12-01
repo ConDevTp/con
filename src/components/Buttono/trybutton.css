@@ -1,0 +1,55 @@
+.btn-tryAgain {
+  background: #584f66;
+  border-radius: 9px;
+  padding: 0px !important;
+  width: 147.22px !important;
+  height: 33px !important;
+  margin-right: 15px;
+}
+
+.btn-tryAgain p {
+  margin: 0px !important;
+  padding: 0px !important;
+  font-size: 16px;
+  font-weight: 600 !important;
+  color: #fff;
+}
+
+.btn-tryAgain img {
+  max-width: 20px;
+  margin-right: 5px;
+  transition: all 0.3s;
+}
+.btn-tryAgain:hover img {
+  -webkit-transform: rotate(180deg) !important;
+  transform: rotate(180deg) !important;
+}
+
+@media (max-width: 992px) {
+  .btn-tryAgain {
+    background: #584f66df;
+    backdrop-filter: blur(10px);
+    border-radius: 9px;
+    position: absolute;
+    bottom: -3px;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    width: 147px;
+    padding: 0px !important;
+    height: 33px;
+    z-index: 50 !important;
+  }
+
+  .btn-tryAgain p {
+    margin: 0px !important;
+    padding: 0px !important;
+    font-size: 16px;
+  }
+
+  .btn-tryAgain img {
+    margin: 0px !important;
+    margin-right: 5px !important;
+    transition: all 0.3s;
+  }
+}

@@ -1,0 +1,99 @@
+.progress-bar .progress {
+  border-radius: 13px !important;
+  background-color: #3a3a3a;
+  width: 261px;
+  height: 26px;
+  overflow: hidden;
+  margin-top: 24px;
+}
+
+.progress-bar .progress .progress-bar {
+  height: 100%;
+  border-radius: 13px;
+}
+
+:root {
+  --stripe-angle-loading: -45deg;
+  --stripe-angle-connected: -45deg;
+  --stripe-angle-failed: -45deg;
+  --stripe-line: 15%;
+  --stripe-gap: 50%;
+}
+
+.progress-bar .progress .loading {
+  background-image: linear-gradient(
+      var(--stripe-angle-loading),
+      rgba(255, 255, 255, 0.2) 0%,
+      rgba(255, 255, 255, 0.2) var(--stripe-line),
+      transparent var(--stripe-line),
+      transparent var(--stripe-gap),
+      rgba(255, 255, 255, 0.2) var(--stripe-gap),
+      rgba(255, 255, 255, 0.2) calc(var(--stripe-gap) + var(--stripe-line)),
+      transparent calc(var(--stripe-gap) + var(--stripe-line)),
+      transparent 100%
+    ),
+    linear-gradient(to right, #4f10f4, #6f38ff);
+  background-size: 1rem 1rem, 100% 100%;
+  -webkit-animation: moveStripes 0.8s linear infinite;
+  animation: moveStripes 0.8s linear infinite;
+}
+
+.progress-bar .progress .connected {
+  background-image: linear-gradient(
+      var(--stripe-angle-connected),
+      rgba(255, 255, 255, 0.2) 0%,
+      rgba(255, 255, 255, 0.2) var(--stripe-line),
+      transparent var(--stripe-line),
+      transparent var(--stripe-gap),
+      rgba(255, 255, 255, 0.2) var(--stripe-gap),
+      rgba(255, 255, 255, 0.2) calc(var(--stripe-gap) + var(--stripe-line)),
+      transparent calc(var(--stripe-gap) + var(--stripe-line)),
+      transparent 100%
+    ),
+    linear-gradient(to right, #4f10f4, #11ff88);
+  background-size: 1rem 1rem, 100% 100%;
+  -webkit-animation: moveStripes 0.8s linear infinite;
+  animation: moveStripes 0.8s linear infinite;
+}
+
+.progress-bar .progress .failed {
+  background-image: linear-gradient(
+      var(--stripe-angle-failed),
+      rgba(255, 255, 255, 0.2) 0%,
+      rgba(255, 255, 255, 0.2) var(--stripe-line),
+      transparent var(--stripe-line),
+      transparent var(--stripe-gap),
+      rgba(255, 255, 255, 0.2) var(--stripe-gap),
+      rgba(255, 255, 255, 0.2) calc(var(--stripe-gap) + var(--stripe-line)),
+      transparent calc(var(--stripe-gap) + var(--stripe-line)),
+      transparent 100%
+    ),
+    linear-gradient(to right, #4f10f4, #ff3859);
+  background-size: 1rem 1rem, 100% 100%;
+  -webkit-animation: moveStripes 0.8s linear infinite;
+  animation: moveStripes 0.8s linear infinite;
+}
+
+.progress-bar .progress .progress-bar {
+  height: 100%;
+  border-radius: 13px;
+  transition: background 0.5s ease, background-size 0.5s ease;
+}
+
+@-webkit-keyframes moveStripes {
+  0% {
+    background-position: 1rem 0, 0 0;
+  }
+  100% {
+    background-position: 0 0, 0 0;
+  }
+}
+
+@keyframes moveStripes {
+  0% {
+    background-position: 0 0, 0 0;
+  }
+  100% {
+    background-position: 1rem 0, 0 0;
+  }
+}
