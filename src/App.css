@@ -34,12 +34,11 @@
   height: 100%;
   position: absolute;
   inset: 0;
-  background: linear-gradient(#11FF88 0%, #460A99 100%);
-  z-index: 5;
+  background: linear-gradient(#11FF88 5%, #460A99 100%);
+  z-index: 10 !important;
   opacity: 0;
   animation: fadeIn 1s forwards;
   border-radius: 44px !important;
-
 }
 
 
@@ -49,12 +48,11 @@
   height: 100%;
   position: absolute;
   inset: 0;
-  background: linear-gradient(#FE1150 0%, #460A99 100%);
-  z-index: 5;
+  background: linear-gradient(#FE1150 5%, #460A99 100%);
+  z-index: 10 !important;
   opacity: 0;
   animation: fadeIn 1s forwards;
   border-radius: 44px !important;
-
 }
 
 
