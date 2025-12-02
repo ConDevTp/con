@@ -28,7 +28,6 @@
   z-index: 100 !important;
 }
 
-
 .square.connected::before {
   content: "";
   width: 100%;
