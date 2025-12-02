@@ -6,6 +6,7 @@
   backdrop-filter: blur(50px) !important;
   border-radius: 25px;
   margin: 0px 7px;
+  transition: .3s all;
 }
 
 .box h3 {
@@ -249,7 +250,7 @@
   }
 
   .box {
-    width: 342.5px !important;
+    width: 80%;
   }
 
   .box:nth-child(1) {
@@ -257,9 +258,78 @@
     margin-top: 10px !important;
   }
 
+
+  .box:nth-child(2) {
+    height: 200.5px !important;
+    margin-top: 90px !important;
+    padding-left: 40px;
+  }
+
+
+  .con-games img:nth-child(1) {
+    top: -60px;
+    right: 20px;
+  }
+
+  .con-games img:nth-child(2) {
+    top: -75px;
+    right: 27px;
+  }
+
+  .con-games img:nth-child(3) {
+    top: -60px;
+    right: 57px;
+  }
+
+
+
+
+  .game-button {
+    right: 25px;
+    bottom: 20px;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 576px) {
+
+
+  .con-games img {
+    right: 15px;
+    bottom: 20px;
+    width: 120px;
+  }
+
   .box:nth-child(2) {
     height: 101.5px !important;
-    margin-top: 30px;
+    margin-top: 30px !important;
+  }
+
+  .box {
+    width: 90%;
   }
 
   .box h3 {
@@ -291,13 +361,65 @@
   }
 
 
-  .con-games img {
-    right: 15px;
-    bottom: 20px;
-    width: 120px;
+
+  .con-games img:nth-child(1) {
+    top: -30px;
+    right: 70px;
+    width: 95px !important;
+    height: 123.5px !important;
+  }
+
+  .con-games img:nth-child(2) {
+    top: -35px;
+    right: 77px;
+    width: 116px !important;
+    height: 125.5px !important;
+  }
+
+  .con-games img:nth-child(3) {
+    top: -22px;
+    right: 107px;
+    width: 100px !important;
+    height: 100.5px !important;
+    transform: rotate(-15deg);
+  }
+
+  .game-button {
+    width: 94px !important;
+    height: 23.5px !important;
+    right: 72px;
+    bottom: 15px;
+    border-radius: 5px;
+    font-weight: 800 !important;
+    font-size: 12px !important;
+  }
+
+  .game-button span {
+    font-size: 12px !important;
+    margin: 0px !important;
+    margin-right: 3px !important;
+  }
+
+  .con-games:hover img:nth-child(1) {
+    transform: translateY(5px);
+  }
+
+  .con-games:hover img:nth-child(2) {
+    transform: translateY(-5px) rotate(0deg);
+  }
+
+  .con-games:hover img:nth-child(3) {
+    transform: translateY(-20px)translateX(0px) rotate(-5deg) !important;
   }
 
 
+}
+
+@media (max-width: 500px) {
+  .box:nth-child(2) {
+    padding-left: 0px !important;
+    margin-top: 10px !important;
+  }
 
   .con-games img:nth-child(1) {
     top: -30px;
@@ -331,21 +453,8 @@
     font-size: 12px !important;
   }
 
-  .game-button span {
-    font-size: 12px !important;
-    margin: 0px !important;
-    margin-right: 3px !important;
-  }
 
-  .con-games:hover img:nth-child(1) {
-    transform: translateY(5px);
-  }
-
-  .con-games:hover img:nth-child(2) {
-    transform: translateY(-5px) rotate(0deg);
-  }
-
-  .con-games:hover img:nth-child(3) {
-    transform: translateY(-20px)translateX(0px) rotate(-5deg) !important;
+  .text-result {
+    margin-top: 0px !important;
   }
 }

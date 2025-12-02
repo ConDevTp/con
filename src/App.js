@@ -89,7 +89,7 @@ width="76" height="83" viewBox="0 0 76 83" fill="none" xmlns="http://www.w3.org/
 
       <ServerProgressBar status={status} progress={percentage} />
 
-      <section className="mt-4 d-flex justify-content-center align-items-center">
+      <section className="mt-3 mt-md-4 d-flex justify-content-center align-items-center">
         {status === "failed" && windowWidth >= 992 && (
           <TryButton status={status} onClick={handleRetry} />
         )}
