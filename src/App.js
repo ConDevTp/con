@@ -93,11 +93,20 @@ width="76" height="83" viewBox="0 0 76 83" fill="none" xmlns="http://www.w3.org/
         {status === "failed" && windowWidth >= 992 && (
           <TryButton status={status} onClick={handleRetry} />
         )}
-        <h2 className="text-result">
-          {status === "loading" && "در حال انتخاب سریع ترین سرور"}
-          {status === "connected" && "اینترنت شما به سرور های ققنوس متصل شد"}
-          {status === "failed" && "لطفا فیلترشکن خود را خاموش کنید"}
-        </h2>
+<h2 className="text-result">
+  {status === "loading" && (
+    percentage < 30
+      ? "در حال ارتباط با سرورها"
+      : percentage < 60
+      ? "در حال انتخاب سریع ترین سرور"
+      : percentage < 80
+      ? "در حال ثبت آیپی"
+      : "در حال تکمیل..."
+  )}
+  {status === "connected" && "اینترنت شما به سرور های ققنوس متصل شد"}
+  {status === "failed" && "لطفا فیلترشکن خود را خاموش کنید"}
+</h2>
+
       </section>
 
       <Cards status={status} percentage={percentage} />

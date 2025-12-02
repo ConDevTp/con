@@ -110,6 +110,7 @@
   font-weight: 600;
   margin-top: 10px;
   font-weight: 600 !important;
+direction: rtl !important;
 }
 
 @media (max-width: 992px) {
