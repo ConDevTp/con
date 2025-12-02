@@ -3,7 +3,7 @@ import "./cards.css";
 import UserIP from "./UserIP";
 import map from "../../assets/map.svg";
 
-const Cards = ({ status }) => {
+const Cards = ({ status , isChange}) => {
   return (
     <section className="mt-4 pt-2 d-flex flex-column-reverse flex-lg-row justify-content-center align-items-center w-100">
       <div className="box box-map d-flex justify-content-center align-items-center">
@@ -73,7 +73,7 @@ const Cards = ({ status }) => {
                 />
               </svg>
             )}
-            <UserIP status={status} />
+            <UserIP status={status} isChange={isChange} />
           </div>
           <h5
             className={
@@ -84,7 +84,7 @@ const Cards = ({ status }) => {
                 : "failed-circle"
             }
           >
-            {status === "loading" && "در حال دریافت "}
+            {status === "loading" && "۸ ms"}
             {status === "connected" && "۲۴۰ ms"}
             {status === "failed" && "۲۷۰ ms"}
           </h5>
@@ -137,12 +137,14 @@ const Cards = ({ status }) => {
 </div>
 
 
-          <button className="game-button d-flex justify-content-center align-items-center">
+<a href="/Your_Web_Link" >
+            <button className="game-button d-flex justify-content-center align-items-center">
             <span>
               <FaAngleLeft />
             </span>
             لیست بازی ها
           </button>
+</a>
         </div>
       </div>
     </section>

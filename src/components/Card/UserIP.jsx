@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "./cards.css";
 
-function UserIP({ status }) {
+function UserIP({ status, isChange }) {
   const [ip, setIP] = useState("");
 
   useEffect(() => {
@@ -9,7 +9,7 @@ function UserIP({ status }) {
       .then((res) => res.json())
       .then((data) => setIP(data.ip))
       .catch((err) => console.error("Cannot get IP:", err));
-  }, []);
+  }, [isChange]);
 
   return (
     <h4 className={status === "failed" ? "failed-text" : ""}>

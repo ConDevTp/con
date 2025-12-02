@@ -14,6 +14,7 @@
   font-size: 20px;
   color: #fff;
   margin-top: 20px;
+  transition: .3s all;
 }
 
 .box .con-ip-text {
@@ -48,18 +49,19 @@
   position: relative;
 }
 
+
+
 .loading-circle::before {
   content: "";
   width: 5px;
   height: 5px;
   border-radius: 50%;
   position: absolute;
-  left: -12px;
+  left: -13px;
   top: 50%;
-  transform: translateY(-50%);
+  transform: translateY(-85%) !important;
   background-color: #3a8fff;
   box-shadow: 0 0 10px 1px #3a8fff66;
-  -webkit-animation: pulse 1s infinite;
   animation: pulse 1s infinite;
 }
 
@@ -166,8 +168,12 @@
   font-weight: 600 !important;
   height: 46px !important;
   width: 193px !important;
+  transition: .4s all;
 }
 
+.game-button:hover {
+  background: #20234d !important;
+}
 
 .game-button span {
   margin-top: -5px;
