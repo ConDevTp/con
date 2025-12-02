@@ -13,6 +13,8 @@ function App() {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [nextStatus, setNextStatus] = useState(null);
   const [ip, setIp] = useState(false);
+  const [shouldAnimate, setShouldAnimate] = useState(true);
+
 
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
@@ -31,7 +33,7 @@ function App() {
           }
           return prev + 1;
         });
-      }, 18);
+      }, 30);
     }
     return () => clearInterval(progressInterval);
   }, [status]);
@@ -75,11 +77,18 @@ function App() {
   }, [status, percentage, nextStatus]);
 
   const handleRetry = () => {
+       setShouldAnimate(false);
+    setTimeout(() => {
+      setShouldAnimate(true);
+    }, 50);
     setPercentage(0);
     setNextStatus(null);
     setStatus("loading");
     setIp(!ip);
+    
   };
+
+  
 
   return (
     <main className="main-container py-5 py-lg-0">
@@ -148,7 +157,12 @@ function App() {
         )}
       </section>
 
-      <ServerProgressBar status={status} progress={percentage} />
+   <ServerProgressBar
+  status={status}
+  progress={percentage}
+  animate={shouldAnimate}
+/>
+
 
       <section className="mt-3 mt-md-4 d-flex justify-content-center align-items-center">
         {status === "failed" && windowWidth >= 992 && (

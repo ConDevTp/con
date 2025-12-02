@@ -1,6 +1,6 @@
 import "./serverProgressBar.css";
 
-const ServerProgressBar = ({ status = "loading", progress = 50 }) => {
+const ServerProgressBar = ({ status = "loading", progress = 50, animate = true }) => {
   return (
     <section className="progress-bar">
       <div
@@ -13,7 +13,7 @@ const ServerProgressBar = ({ status = "loading", progress = 50 }) => {
           className={`progress-bar ${status}`}
           style={{
             width: `${progress}%`,
-            transition: "width 0.5s ease",
+            transition: animate ? "width 0.5s ease" : "none",
           }}
         ></div>
       </div>
