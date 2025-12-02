@@ -91,24 +91,52 @@ const Cards = ({ status }) => {
         </div>
 
         <div className="con-games">
-          <img
-            src={require("../../assets/game1.png")}
-            className="img-fluid"
-            alt="Game-1"
-            loading="lazy"
-          />
-          <img
-            src={require("../../assets/game2.png")}
-            className="img-fluid"
-            alt="Game-2"
-            loading="lazy"
-          />
-          <img
-            src={require("../../assets/gmae3.png")}
-            className="img-fluid"
-            alt="Game-3"
-            loading="lazy"
-          />
+<div className="game-1">
+  <img
+    src={require("../../assets/game1.png")}
+    alt="Game-1"
+    className="game-lg"
+    loading="lazy"
+  />
+  <img
+    src={require("../../assets/game1-sm.png")}
+    alt="Game-1"
+    className="game-sm"
+    loading="lazy"
+  />
+</div>
+
+<div className="game-2">
+  <img
+    src={require("../../assets/game2.png")}
+    alt="Game-2"
+    className="game-lg"
+    loading="lazy"
+  />
+  <img
+    src={require("../../assets/game2-sm.png")}
+    alt="Game-2"
+    className="game-sm"
+    loading="lazy"
+  />
+</div>
+
+<div className="game-3">
+  <img
+    src={require("../../assets/gmae3.png")}
+    alt="Game-3"
+    className="game-lg"
+    loading="lazy"
+  />
+  <img
+    src={require("../../assets/gmae3-sm.png")}
+    alt="Game-3"
+    className="game-sm"
+    loading="lazy"
+  />
+</div>
+
+
           <button className="game-button d-flex justify-content-center align-items-center">
             <span>
               <FaAngleLeft />
