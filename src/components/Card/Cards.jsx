@@ -84,7 +84,7 @@ const Cards = ({ status }) => {
                 : "failed-circle"
             }
           >
-            {status === "loading" && "Loading..."}
+            {status === "loading" && "در حال دریافت "}
             {status === "connected" && "۲۴۰ ms"}
             {status === "failed" && "۲۷۰ ms"}
           </h5>

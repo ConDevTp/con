@@ -13,7 +13,7 @@ function UserIP({ status }) {
 
   return (
     <h4 className={status === "failed" ? "failed-text" : ""}>
-      {ip || "Loading..."}
+      {ip || "در حال دریافت "}
     </h4>
   );
 }
