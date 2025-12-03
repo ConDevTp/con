@@ -9,6 +9,7 @@ import NumberFlow, { continuous } from "@number-flow/react";
 import StatusAnimatedText from "./components/TextAnimaion/StatusAnimatedText";
 import Loading from "./components/Loading/Loading";
 import { AnimatePresence, motion } from "framer-motion";
+
 const images = [
   require("./assets/game1.png"),
   require("./assets/game1-sm.png"),
@@ -27,65 +28,46 @@ function App() {
   const [shouldAnimate, setShouldAnimate] = useState(true);
   const [isGet, setIsGet] = useState(false);
   const [finalStatus, setFinalStatus] = useState(null);
-  const [isOnline, setIsOnline] = useState(navigator.onLine);
 
+  // فقط 10 ثانیه بعد isGet فعال می‌شود
   useEffect(() => {
     const timer = setTimeout(() => {
-      if (isOnline) setIsGet(true);
+      setIsGet(true);
     }, 10000);
     return () => clearTimeout(timer);
-  }, [isOnline]);
-
-  useEffect(() => {
-    const handleOnline = () => setIsOnline(true);
-    const handleOffline = () => setIsOnline(false);
-
-    window.addEventListener("online", handleOnline);
-    window.addEventListener("offline", handleOffline);
-
-    return () => {
-      window.removeEventListener("online", handleOnline);
-      window.removeEventListener("offline", handleOffline);
-    };
   }, []);
 
+  // فقط گرفتن آی‌پی (بدون شرایط اینترنت)
   useEffect(() => {
-    const handleResize = () => setWindowWidth(window.innerWidth);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+    if (isGet) {
+      let cancelled = false;
 
-  useEffect(() => {
-    if (isGet || !isOnline) return;
+      const fetchIP = async () => {
+        try {
+          const res = await fetch("https://ipwhois.app/json/");
+          const data = await res.json();
+          if (cancelled) return;
 
-    let cancelled = false;
-
-    const fetchIP = async () => {
-      try {
-        const res = await fetch("https://ipwhois.app/json/");
-        const data = await res.json();
-        if (cancelled) return;
-
-        setIp(data?.ip || "نامشخص");
-
-        const resultStatus =
-          data?.country_code === "IR" ? "connected" : "failed";
-        setFinalStatus(resultStatus);
-      } catch (err) {
-        if (!cancelled) {
-          setIp("نامشخص");
-          setFinalStatus("failed");
+          setIp(data?.ip || "نامشخص");
+          const resultStatus =
+            data?.country_code === "IR" ? "connected" : "failed";
+          setFinalStatus(resultStatus);
+        } catch {
+          if (!cancelled) {
+            setIp("نامشخص");
+            setFinalStatus("failed");
+          }
         }
-      }
-    };
+      };
 
-    fetchIP();
+      fetchIP();
+      return () => {
+        cancelled = true;
+      };
+    }
+  }, [isGet]);
 
-    return () => {
-      cancelled = true;
-    };
-  }, [isGet, isOnline]);
-
+  // انیمیشن درصد
   useEffect(() => {
     if (!isGet || status !== "loading") return;
 
@@ -102,8 +84,10 @@ function App() {
     return () => clearInterval(progressInterval);
   }, [status, isGet]);
 
+  // تعیین وضعیت نهایی
   useEffect(() => {
     if (!isGet) return;
+
     if (status === "loading" && percentage === 100 && finalStatus) {
       setStatus(finalStatus);
     }
@@ -120,10 +104,11 @@ function App() {
     setIsGet(false);
 
     setTimeout(() => {
-      if (isOnline) setIsGet(true);
+      setIsGet(true);
     }, 10000);
   };
 
+  // preload images
   useEffect(() => {
     images.forEach((src) => {
       const img = new Image();
@@ -131,10 +116,16 @@ function App() {
     });
   }, []);
 
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <main className="main-container py-5 py-lg-0">
       <AnimatePresence>
-        {!isGet || !isOnline ? (
+        {!isGet ? (
           <motion.div
             key="loading"
             initial={{ position: "absolute", opacity: 0 }}
@@ -142,21 +133,21 @@ function App() {
             exit={{ position: "absolute", display: "none", opacity: 0 }}
             transition={{
               animate: { duration: 0.5, ease: "easeOut" },
-              exit: { duration: 0.00000000000000000000001, ease: "easeIn" },
+              exit: { duration: 0.0000000001, ease: "easeIn" },
             }}
           >
             <Loading />
           </motion.div>
         ) : (
           <>
-            {/* Hidden preload container during Splash Screen */}
+            {/* Hidden Preload */}
             <div style={{ position: "absolute", visibility: "hidden" }}>
               <div className="ui-preload">
                 <div className="d-flex justify-content-center align-items-center flex-column w-100">
-                  {" "}
                   <section className={`square ${status}`}>
                     <div className="square-border"></div>
 
+                    {/* ICONS */}
                     <svg
                       className={`m-icon m-icon-check ${
                         status !== "connected" ? "m-hide" : ""
@@ -164,8 +155,6 @@ function App() {
                       width="83"
                       height="65"
                       viewBox="0 0 83 65"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
                     >
                       <path
                         d="M7.10156 23.123L31.894 51.0183L75.6454 6.67188"
@@ -181,8 +170,6 @@ function App() {
                       width="76"
                       height="83"
                       viewBox="0 0 76 83"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
                     >
                       <path
                         fillRule="evenodd"
@@ -222,11 +209,13 @@ function App() {
                       <TryButton status={status} onClick={handleRetry} />
                     )}
                   </section>
+
                   <ServerProgressBar
                     status={status}
                     progress={percentage}
                     animate={shouldAnimate}
                   />
+
                   <section className="mt-3 mt-md-4 d-flex justify-content-center align-items-center">
                     {status === "failed" && windowWidth >= 992 && (
                       <TryButton status={status} onClick={handleRetry} />
@@ -237,6 +226,7 @@ function App() {
                       windowWidth={windowWidth}
                     />
                   </section>
+
                   <Cards
                     status={status}
                     percentage={percentage}
@@ -246,7 +236,7 @@ function App() {
               </div>
             </div>
 
-            {/* Actual UI نمایش داده شده بعد Splash */}
+            {/* UI واقعی */}
             <motion.div
               className="w-100"
               key="ui"
@@ -255,11 +245,10 @@ function App() {
               exit={{ opacity: 0, y: -10 }}
               transition={{
                 animate: { duration: 0.5, ease: "easeOut" },
-                exit: { duration: 0.00000000000000000000001, ease: "easeIn" },
+                exit: { duration: 0.0000001, ease: "easeIn" },
               }}
             >
               <div className="d-flex justify-content-center align-items-center flex-column w-100">
-                {" "}
                 <section className={`square ${status}`}>
                   <div className="square-border"></div>
 
@@ -326,11 +315,13 @@ function App() {
                     <TryButton status={status} onClick={handleRetry} />
                   )}
                 </section>
+
                 <ServerProgressBar
                   status={status}
                   progress={percentage}
                   animate={shouldAnimate}
                 />
+
                 <section className="mt-3 mt-md-4 d-flex justify-content-center align-items-center">
                   {status === "failed" && windowWidth >= 992 && (
                     <TryButton status={status} onClick={handleRetry} />
@@ -341,6 +332,7 @@ function App() {
                     windowWidth={windowWidth}
                   />
                 </section>
+
                 <Cards status={status} percentage={percentage} isChange={ip} />
               </div>
             </motion.div>
