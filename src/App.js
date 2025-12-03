@@ -9,6 +9,15 @@ import NumberFlow, { continuous } from "@number-flow/react";
 import StatusAnimatedText from "./components/TextAnimaion/StatusAnimatedText";
 import Loading from "./components/Loading/Loading";
 import { AnimatePresence, motion } from "framer-motion";
+const images = [
+  require("./assets/game1.png"),
+  require("./assets/game1-sm.png"),
+  require("./assets/game2.png"),
+  require("./assets/game2-sm.png"),
+  require("./assets/gmae3.png"),
+  require("./assets/gmae3-sm.png"),
+  require("./assets/map.svg"),
+];
 
 function App() {
   const [percentage, setPercentage] = useState(0);
@@ -114,6 +123,13 @@ function App() {
       if (isOnline) setIsGet(true);
     }, 10000);
   };
+
+  useEffect(() => {
+    images.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+  }, []);
 
   return (
     <main className="main-container py-5 py-lg-0">

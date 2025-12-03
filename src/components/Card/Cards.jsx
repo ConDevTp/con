@@ -7,12 +7,7 @@ const Cards = ({ status, isChange }) => {
   return (
     <section className="mt-4 pt-2 d-flex flex-column-reverse flex-lg-row justify-content-center align-items-center w-100">
       <div className="box box-map d-flex justify-content-center align-items-center">
-        <img
-          src={map}
-          className="img-fluid rounded-top"
-          alt="Map"
-          loading="lazy"
-        />
+        <img src={map} className="img-fluid rounded-top" alt="Map" />
         <span className="map-dot dot-1"></span>
         <span className="map-dot dot-2"></span>
         <span className="map-dot dot-3"></span>
@@ -96,13 +91,11 @@ const Cards = ({ status, isChange }) => {
               src={require("../../assets/game1.png")}
               alt="Game-1"
               className="game-lg"
-              loading="lazy"
             />
             <img
               src={require("../../assets/game1-sm.png")}
               alt="Game-1"
               className="game-sm"
-              loading="lazy"
             />
           </div>
 
@@ -111,13 +104,11 @@ const Cards = ({ status, isChange }) => {
               src={require("../../assets/game2.png")}
               alt="Game-2"
               className="game-lg"
-              loading="lazy"
             />
             <img
               src={require("../../assets/game2-sm.png")}
               alt="Game-2"
               className="game-sm"
-              loading="lazy"
             />
           </div>
 
@@ -126,13 +117,11 @@ const Cards = ({ status, isChange }) => {
               src={require("../../assets/gmae3.png")}
               alt="Game-3"
               className="game-lg"
-              loading="lazy"
             />
             <img
               src={require("../../assets/gmae3-sm.png")}
               alt="Game-3"
               className="game-sm"
-              loading="lazy"
             />
           </div>
 
