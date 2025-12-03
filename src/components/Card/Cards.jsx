@@ -1,13 +1,16 @@
 import { FaAngleLeft } from "react-icons/fa6";
 import "./cards.css";
 import UserIP from "./UserIP";
-import map from "../../assets/map.svg";
 
 const Cards = ({ status, isChange }) => {
   return (
     <section className="mt-4 pt-2 d-flex flex-column-reverse flex-lg-row justify-content-center align-items-center w-100">
       <div className="box box-map d-flex justify-content-center align-items-center">
-        <img src={map} className="img-fluid rounded-top" alt="Map" />
+        <img
+          src={require("../../assets/map.png")}
+          className="img-fluid rounded-top"
+          alt="Map"
+        />
         <span className="map-dot dot-1"></span>
         <span className="map-dot dot-2"></span>
         <span className="map-dot dot-3"></span>

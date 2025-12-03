@@ -16,7 +16,7 @@ const images = [
   require("./assets/game2-sm.png"),
   require("./assets/gmae3.png"),
   require("./assets/gmae3-sm.png"),
-  require("./assets/map.svg"),
+  require("./assets/map.png"),
 ];
 
 function App() {
