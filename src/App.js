@@ -28,13 +28,48 @@ function App() {
   const [shouldAnimate, setShouldAnimate] = useState(true);
   const [isGet, setIsGet] = useState(false);
   const [finalStatus, setFinalStatus] = useState(null);
+  const [showLoading, setShowLoading] = useState(true);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsGet(true);
-    }, 10000);
-    return () => clearTimeout(timer);
-  }, []);
+
+useEffect(() => {
+  let cancelled = false;
+
+  const loadIP = async () => {
+    // حداقل زمان لودینگ
+    const MIN_LOADING = 700;
+    const startTime = Date.now();
+
+    try {
+      const res = await fetch("https://ipwhois.app/json/");
+      const data = await res.json();
+
+      if (cancelled) return;
+
+      // محاسبه باقی‌مانده زمان حداقلی
+      const elapsed = Date.now() - startTime;
+      const remaining = MIN_LOADING - elapsed;
+
+      setTimeout(() => {
+        setIp(data?.ip || "نامشخص");
+        const status = data?.country_code === "IR" ? "connected" : "failed";
+        setFinalStatus(status);
+        setIsGet(true);
+      }, remaining > 0 ? remaining : 0);
+    } catch {
+      if (!cancelled) {
+        setTimeout(() => {
+          setIp("نامشخص");
+          setFinalStatus("failed");
+          setIsGet(true);
+        }, 500); // برای خطا هم حداقل ۵۰۰ms لودینگ
+      }
+    }
+  };
+
+  loadIP();
+  return () => (cancelled = true);
+}, []);
+
 
   useEffect(() => {
     if (isGet) {
@@ -89,20 +124,39 @@ function App() {
     }
   }, [status, percentage, finalStatus, isGet]);
 
-  const handleRetry = () => {
-    setShouldAnimate(false);
-    setTimeout(() => setShouldAnimate(true), 50);
+const handleRetry = () => {
+  setShouldAnimate(false);
+  setTimeout(() => setShouldAnimate(true), 50);
 
-    setPercentage(0);
-    setStatus("loading");
-    setIp(false);
-    setFinalStatus(null);
-    setIsGet(false);
+  setPercentage(0);
+  setStatus("loading");
+  setIp(false);
+  setFinalStatus(null);
 
-    setTimeout(() => {
-      setIsGet(true);
-    }, 10000);
+  // IP دوباره گرفته شود
+  let cancelled = false;
+
+  const fetchIPAgain = async () => {
+    try {
+      const res = await fetch("https://ipwhois.app/json/");
+      const data = await res.json();
+      if (cancelled) return;
+
+      setIp(data?.ip || "نامشخص");
+      setFinalStatus(data?.country_code === "IR" ? "connected" : "failed");
+      setIsGet(true); // نمایش UI اصلی
+    } catch {
+      if (!cancelled) {
+        setIp("نامشخص");
+        setFinalStatus("failed");
+        setIsGet(true);
+      }
+    }
   };
+
+  fetchIPAgain();
+};
+
 
   useEffect(() => {
     images.forEach((src) => {
@@ -119,8 +173,10 @@ function App() {
 
   return (
     <main className="main-container py-5 py-lg-0">
+        <p>آی‌پی شما: {ip}</p>
+
       <AnimatePresence>
-        {!isGet ? (
+        {showLoading && !isGet ? (
           <motion.div
             key="loading"
             initial={{ position: "absolute", opacity: 0 }}
