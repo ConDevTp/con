@@ -70,10 +70,12 @@
     -webkit-transform: translateY(-65%) scale(1);
     transform: translateY(-65%) scale(1);
   }
+
   50% {
     -webkit-transform: translateY(-65%) scale(1.3);
     transform: translateY(-65%) scale(1.3);
   }
+
   100% {
     -webkit-transform: translateY(-65%) scale(1);
     transform: translateY(-65%) scale(1);
@@ -85,10 +87,12 @@
     -webkit-transform: translateY(-65%) scale(1);
     transform: translateY(-65%) scale(1);
   }
+
   50% {
     -webkit-transform: translateY(-65%) scale(1.3);
     transform: translateY(-65%) scale(1.3);
   }
+
   100% {
     -webkit-transform: translateY(-65%) scale(1);
     transform: translateY(-65%) scale(1);
@@ -102,9 +106,9 @@
   border-radius: 50%;
   position: absolute;
   left: -12px;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-  transform: translateY(-50%);
+  top: 45%;
+  -webkit-transform: translateY(-65%);
+  transform: translateY(-65%);
   background-color: #11ff98;
   box-shadow: 0 0 10px 1px #11ff98ca;
 }
@@ -116,9 +120,9 @@
   border-radius: 50%;
   position: absolute;
   left: -12px;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-  transform: translateY(-50%);
+  top: 45%;
+  -webkit-transform: translateY(-65%);
+  transform: translateY(-65%);
   background-color: #ff3859;
   box-shadow: 0 0 10px 1px #ff3859bb;
 }
@@ -319,11 +323,9 @@
   .box:nth-child(1) {
     height: 241.5px !important;
     margin-top: 10px !important;
-    background: radial-gradient(
-      50% 50% at 50% 50%,
-      rgba(69, 55, 100, 0.4) 0%,
-      rgba(0, 0, 0, 0.4) 100%
-    ) !important;
+    background: radial-gradient(50% 50% at 50% 50%,
+        rgba(69, 55, 100, 0.4) 0%,
+        rgba(0, 0, 0, 0.4) 100%) !important;
   }
 
   .box:nth-child(2) {
@@ -355,6 +357,7 @@
 }
 
 @media (max-width: 576px) {
+
   .con-games .game-1,
   .game-2,
   .game-3 {

@@ -85,8 +85,8 @@ const Cards = ({ status, ip }) => {
             }
           >
             {status === "loading" && "۸ ms"}
-            {status === "connected" && "۲۴۰ ms"}
-            {status === "failed" && "۲۷۰ ms"}
+            {status === "connected" && "۸ ms"}
+            {status === "failed" && "۸ ms"}
           </h5>
         </div>
 
